@@ -47,7 +47,6 @@ using QuantConnect.Securities;
 using QuantConnect.Util;
 using Timer = System.Timers.Timer;
 using static QuantConnect.StringExtensions;
-using System.Runtime.CompilerServices;
 using QuantConnect.Data.Auxiliary;
 using QuantConnect.Securities.Option;
 
