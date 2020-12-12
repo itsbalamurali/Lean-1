@@ -204,6 +204,9 @@ namespace QuantConnect.Brokerages
                 case BrokerageName.Zerodha:
                     return new ZerodhaBrokerageModel(accountType);
 
+                case BrokerageName.Upstox:
+                    return new UpstoxBrokerageModel(accountType);
+
                 default:
                     throw new ArgumentOutOfRangeException(nameof(brokerage), brokerage, null);
             }
