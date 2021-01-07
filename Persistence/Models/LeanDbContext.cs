@@ -6,6 +6,7 @@ namespace QuantConnect.Persistence.Models
 {
     public partial class LeanDbContext : DbContext
     {
+        public virtual DbSet<DbBacktestResult> DbBacktestResult { get; set; }
         public LeanDbContext()
         {
         }
@@ -27,6 +28,7 @@ namespace QuantConnect.Persistence.Models
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             OnModelCreatingPartial(modelBuilder);
+            modelBuilder.Entity<DbBacktestResult>();
         }
 
         partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
