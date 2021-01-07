@@ -225,6 +225,10 @@
       <Project>{ac9a142c-b485-44d7-91ff-015c22c43d05}</Project>
       <Name>QuantConnect.ToolBox</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Persistence\QuantConnect.Persistence.csproj">
+      <Project>{C5724C4B-95F7-4642-8D1A-3D9A6A4B0F95}</Project>
+      <Name>QuantConnect.Persistence</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config">

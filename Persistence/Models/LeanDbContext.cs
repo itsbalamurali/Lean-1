@@ -1,12 +1,23 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata;
+﻿using Microsoft.EntityFrameworkCore;
+using QuantConnect.Configuration;
+using QuantConnect.Orders;
+using QuantConnect.Packets;
 
 namespace QuantConnect.Persistence.Models
 {
     public partial class LeanDbContext : DbContext
     {
-        public virtual DbSet<DbBacktestResult> DbBacktestResult { get; set; }
+        public virtual DbSet<BacktestResult> BacktestResult { get; set; }
+        public virtual DbSet<Chart> Chart { get; set; }
+        public virtual DbSet<Order> Order { get; set; }
+        //public virtual DbSet<ProfitLoss> ProfitLoss { get; set; }
+
+        //public virtual DbSet<Chart> Chart { get; set; }
+
+        //public virtual DbSet<Chart> Chart { get; set; }
+
+        //public virtual DbSet<Chart> Chart { get; set; }
+
         public LeanDbContext()
         {
         }
@@ -20,15 +31,22 @@ namespace QuantConnect.Persistence.Models
         {
             if (!optionsBuilder.IsConfigured)
             {
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                optionsBuilder.UseNpgsql("Host=localhost;Database=Lean;Username=postgres;Password=postgres");
+                var hostname = Config.Get("Persistence.Database.HostName","localhost");
+                var dbName = Config.Get("Persistence.Database.Name", "Lean");
+                var dbUsername = Config.Get("Persistence.Database.Username", "postgres");
+                var dbPassword = Config.Get("Persistence.Database.Password", "postgres");
+                optionsBuilder.UseNpgsql("Host="+hostname+";Database="+dbName+ ";Username=" + dbUsername + ";Password=" + dbPassword + "");
             }
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             OnModelCreatingPartial(modelBuilder);
-            modelBuilder.Entity<DbBacktestResult>();
+            modelBuilder.Entity<BacktestResult>();
+            modelBuilder.Entity<Chart>();
+            modelBuilder.Entity<Order>();
+
+
         }
 
         partial void OnModelCreatingPartial(ModelBuilder modelBuilder);

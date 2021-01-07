@@ -297,7 +297,15 @@ namespace QuantConnect.Persistence
                     // Save results
                     SaveResults(key, results);
 
-                    _dbContext.DbBacktestResult.Add(results as DbBacktestResult);
+                    foreach( var chartKv in  result.Results.Charts.ToDictionary(x => x.Key, x => x.Value.Clone()))
+                    {
+                        _dbContext.Chart.Add(chartKv.Value);
+
+                    }
+                    foreach(var orderKv in result.Results.Orders)
+                    {
+                        _dbContext.Order.Add(orderKv.Value);
+                    }
                     _dbContext.SaveChanges();
 
                     // Store Order Events in a separate file
