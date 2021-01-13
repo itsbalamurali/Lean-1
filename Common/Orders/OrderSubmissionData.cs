@@ -47,6 +47,11 @@ namespace QuantConnect.Orders
             LastPrice = lastPrice;
         }
 
+        public OrderSubmissionData()
+        {
+        }
+
+
         /// <summary>
         /// Return a new instance clone of this object
         /// </summary>

@@ -315,6 +315,10 @@ namespace QuantConnect
             Value = value.LazyToUpper();
         }
 
+        public Symbol()
+        {
+        }
+
         /// <summary>
         /// Creates new symbol with updated mapped symbol. Symbol Mapping: When symbols change over time (e.g. CHASE-> JPM) need to update the symbol requested.
         /// Method returns newly created symbol

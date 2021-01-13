@@ -375,6 +375,10 @@ namespace QuantConnect
             }
         }
 
+        public SecurityIdentifier()
+        {
+        }
+
         #endregion
 
         #region AddMarket, GetMarketCode, and Generate
