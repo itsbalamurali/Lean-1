@@ -68,7 +68,7 @@
     </When>
   </Choose>
   <ItemGroup>
-    <PackageReference Include="CoinAPI.WebSocket.V1" Version="1.6.0" />
+    <PackageReference Include="CoinAPI.WebSocket.V1" Version="1.6.6" />
     <PackageReference Include="Common.Logging" Version="3.4.1" />
     <PackageReference Include="Common.Logging.Core" Version="3.4.1" />
     <PackageReference Include="DotNetZip" Version="1.13.3" />
