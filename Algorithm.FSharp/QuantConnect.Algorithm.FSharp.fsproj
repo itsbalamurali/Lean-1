@@ -64,7 +64,7 @@
   </Choose>
   <ItemGroup>
     <PackageReference Update="FSharp.Core" Version="$(TargetFSharpCoreVersion)" />
-    <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="2.9.3" />
+    <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="2.9.12" />
     <PackageReference Include="Microsoft.CodeAnalysis.VersionCheckAnalyzer" Version="2.9.3" />
     <PackageReference Include="Microsoft.CodeQuality.Analyzers" Version="2.9.3" />
     <PackageReference Include="Microsoft.NetCore.Analyzers" Version="2.9.3" />
