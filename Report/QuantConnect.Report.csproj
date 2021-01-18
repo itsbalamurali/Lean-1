@@ -65,7 +65,7 @@
     </When>
   </Choose>
   <ItemGroup>
-    <PackageReference Include="Deedle" Version="2.1.0" />
+    <PackageReference Include="Deedle" Version="2.3.0" />
     <PackageReference Include="FSharp.Core" Version="4.5.2" />
     <PackageReference Include="MathNet.Numerics" Version="4.9.0" />
     <PackageReference Include="morelinq" Version="3.2.0" />
