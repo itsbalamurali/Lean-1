@@ -69,7 +69,7 @@
     <PackageReference Include="Accord" Version="3.6.0" />
     <PackageReference Include="Accord.Fuzzy" Version="3.6.0" />
     <PackageReference Include="Accord.MachineLearning" Version="3.6.0" />
-    <PackageReference Include="Accord.Math" Version="3.6.0" />
+    <PackageReference Include="Accord.Math" Version="3.8.0" />
     <PackageReference Include="Accord.Statistics" Version="3.6.0" />
     <PackageReference Include="DynamicInterop" Version="0.7.4" />
     <PackageReference Include="MathNet.Numerics" Version="3.19.0" />
