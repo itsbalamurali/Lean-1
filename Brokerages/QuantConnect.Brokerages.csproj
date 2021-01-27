@@ -89,4 +89,7 @@
     <Compile Remove="Binance\BinanceUtil.cs" />
     <Compile Remove="Alpaca\Markets\AlpacaTradingClient.WatchList.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Exante\" />
+  </ItemGroup>
 </Project>
