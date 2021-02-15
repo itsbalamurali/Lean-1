@@ -69,7 +69,7 @@
   </Choose>
   <ItemGroup>
     <PackageReference Include="Accord" Version="3.6.0" />
-    <PackageReference Include="Accord.Fuzzy" Version="3.6.0" />
+    <PackageReference Include="Accord.Fuzzy" Version="3.8.0" />
     <PackageReference Include="Accord.MachineLearning" Version="3.6.0" />
     <PackageReference Include="Accord.Math" Version="3.6.0" />
     <PackageReference Include="Accord.Statistics" Version="3.6.0" />
