@@ -33,6 +33,7 @@ using QuantConnect.ToolBox.FxcmVolumeDownload;
 using QuantConnect.ToolBox.GDAXDownloader;
 using QuantConnect.ToolBox.IBDownloader;
 using QuantConnect.ToolBox.IEX;
+using QuantConnect.ToolBox.IndicesDataConverter;
 using QuantConnect.ToolBox.IQFeedDownloader;
 using QuantConnect.ToolBox.IVolatilityEquityConverter;
 using QuantConnect.ToolBox.KaikoDataConverter;
@@ -239,8 +240,12 @@ namespace QuantConnect.ToolBox
                         break;
                     case "nmdc":
                     case "nsemarketdataconverter":
-                        NseMarketDataConverterProgram.NseMarketDataConverter(GetParameterOrExit(optionsObject, "source-dir"),
-                                                                             GetParameterOrExit(optionsObject, "destination-dir"));
+                        NseMarketDataConverterProgram.NseMarketDataConverter(GetParameterOrExit(optionsObject, "source-dir"),GetParameterOrExit(optionsObject, "destination-dir"));
+                        break;
+                    case "idc":
+                    case "idcmarketdataconverter":
+                        IndicesDataConverterProgram.IndicesDataConverter(GetParameterOrExit(optionsObject, "source-dir"),
+                            GetParameterOrExit(optionsObject, "destination-dir"));
                         break;
                     case "qqc":
                     case "quantquoteconverter":

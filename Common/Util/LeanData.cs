@@ -530,6 +530,7 @@ namespace QuantConnect.Util
                 case SecurityType.Equity:
                 case SecurityType.Forex:
                 case SecurityType.Cfd:
+                case SecurityType.Index:
                 case SecurityType.Crypto:
                     return !isHourOrDaily ? Path.Combine(directory, symbol.Value.ToLowerInvariant()) : directory;
 
@@ -603,6 +604,7 @@ namespace QuantConnect.Util
                 case SecurityType.Equity:
                 case SecurityType.Forex:
                 case SecurityType.Cfd:
+                case SecurityType.Index:
                 case SecurityType.Crypto:
                     if (resolution == Resolution.Tick && symbol.SecurityType == SecurityType.Equity)
                     {
@@ -714,6 +716,7 @@ namespace QuantConnect.Util
                 case SecurityType.Base:
                 case SecurityType.Equity:
                 case SecurityType.Forex:
+                case SecurityType.Index:
                 case SecurityType.Cfd:
                     if (isHourOrDaily)
                     {

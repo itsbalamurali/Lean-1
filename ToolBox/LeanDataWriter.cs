@@ -59,8 +59,14 @@ namespace QuantConnect.ToolBox
             {
                 _tickType = TickType.Quote;
             }
+            
+            // All Index data is trade data.
+            if (_securityType == SecurityType.Index)
+            {
+                _tickType = TickType.Trade;
+            }
 
-            if (_securityType != SecurityType.Equity && _securityType != SecurityType.Forex && _securityType != SecurityType.Cfd && _securityType != SecurityType.Crypto && _securityType != SecurityType.Future && _securityType != SecurityType.Option && _securityType != SecurityType.FutureOption)
+            if (_securityType != SecurityType.Equity && _securityType != SecurityType.Forex && _securityType != SecurityType.Cfd && _securityType != SecurityType.Index && _securityType != SecurityType.Crypto && _securityType != SecurityType.Future && _securityType != SecurityType.Option && _securityType != SecurityType.FutureOption)
             {
                 throw new Exception("Sorry this security type is not yet supported by the LEAN data writer: " + _securityType);
             }
