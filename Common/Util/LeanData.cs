@@ -213,7 +213,11 @@ namespace QuantConnect.Util
                             {
                                 throw new ArgumentException("Expected data of type 'Tick'", nameof(data));
                             }
-                            return ToCsv(milliseconds, tick.BidPrice, tick.AskPrice);
+                            if (tick.TickType == TickType.Trade)
+                            {
+                                return ToCsv(milliseconds, tick.LastPrice, tick.Quantity);
+                            }
+                            throw new ArgumentException("Index tick could not be created");
 
                         case Resolution.Second:
                         case Resolution.Minute:
@@ -222,10 +226,8 @@ namespace QuantConnect.Util
                             {
                                 throw new ArgumentException("Expected data of type 'TradeBar'", nameof(data));
                             }
-                            return ToCsv(milliseconds,
-                                ToNonScaledCsv(bar.Bid), bar.LastBidSize,
-                                ToNonScaledCsv(bar.Ask), bar.LastAskSize);
-
+                            
+                            return ToCsv(longTime, Scale(bar.Open), Scale(bar.High), Scale(bar.Low), Scale(bar.Close), bar.Volume);
                         case Resolution.Hour:
                         case Resolution.Daily:
                             var bigBar = data as TradeBar;
@@ -233,9 +235,8 @@ namespace QuantConnect.Util
                             {
                                 throw new ArgumentException("Expected data of type 'TradeBar'", nameof(data));
                             }
-                            return ToCsv(longTime,
-                                ToNonScaledCsv(bigBar.Bid), bigBar.LastBidSize,
-                                ToNonScaledCsv(bigBar.Ask), bigBar.LastAskSize);
+                            return ToCsv(longTime, Scale(bigBar.Open), Scale(bigBar.High), Scale(bigBar.Low), Scale(bigBar.Close), bigBar.Volume);
+
                     }
                     break;
 
