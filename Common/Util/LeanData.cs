@@ -207,36 +207,16 @@ namespace QuantConnect.Util
                 case SecurityType.Index:
                     switch (resolution)
                     {
-                        case Resolution.Tick:
-                            var tick = data as Tick;
-                            if (tick == null)
-                            {
-                                throw new ArgumentException("Expected data of type 'Tick'", nameof(data));
-                            }
-                            if (tick.TickType == TickType.Trade)
-                            {
-                                return ToCsv(milliseconds, tick.LastPrice, tick.Quantity);
-                            }
-                            throw new ArgumentException("Index tick could not be created");
-
-                        case Resolution.Second:
                         case Resolution.Minute:
                             var bar = data as TradeBar;
                             if (bar == null)
                             {
                                 throw new ArgumentException("Expected data of type 'TradeBar'", nameof(data));
                             }
-                            
-                            return ToCsv(longTime, Scale(bar.Open), Scale(bar.High), Scale(bar.Low), Scale(bar.Close), bar.Volume);
-                        case Resolution.Hour:
-                        case Resolution.Daily:
-                            var bigBar = data as TradeBar;
-                            if (bigBar == null)
-                            {
-                                throw new ArgumentException("Expected data of type 'TradeBar'", nameof(data));
-                            }
-                            return ToCsv(longTime, Scale(bigBar.Open), Scale(bigBar.High), Scale(bigBar.Low), Scale(bigBar.Close), bigBar.Volume);
+                            return ToCsv(milliseconds, bar.Open, bar.High, bar.Low, bar.Close, bar.Volume);
 
+                        default:
+                            throw new NotSupportedException("Index only supports writing minute data a this time.");
                     }
                     break;
 
@@ -528,6 +508,7 @@ namespace QuantConnect.Util
             {
                 case SecurityType.Base:
                 case SecurityType.Equity:
+                case SecurityType.Index:
                 case SecurityType.Forex:
                 case SecurityType.Cfd:
                 case SecurityType.Index:
@@ -602,6 +583,7 @@ namespace QuantConnect.Util
             {
                 case SecurityType.Base:
                 case SecurityType.Equity:
+                case SecurityType.Index:
                 case SecurityType.Forex:
                 case SecurityType.Cfd:
                 case SecurityType.Index:
@@ -714,6 +696,7 @@ namespace QuantConnect.Util
             switch (symbol.ID.SecurityType)
             {
                 case SecurityType.Base:
+                case SecurityType.Index:
                 case SecurityType.Equity:
                 case SecurityType.Forex:
                 case SecurityType.Index:
@@ -774,7 +757,18 @@ namespace QuantConnect.Util
             }
 
             var zipFileName = date.ToStringInvariant(DateFormat.EightCharacter);
-            tickType = tickType ?? (securityType == SecurityType.Forex || securityType == SecurityType.Cfd ? TickType.Quote : TickType.Trade);
+
+            if (tickType == null)
+            {
+                if (securityType == SecurityType.Forex || securityType == SecurityType.Cfd) {
+                    tickType = TickType.Quote;
+                } 
+                else
+                {
+                    tickType = TickType.Trade;
+                }
+            }
+
             var suffix = Invariant($"_{tickType.Value.TickTypeToLower()}.zip");
             return zipFileName + suffix;
         }
