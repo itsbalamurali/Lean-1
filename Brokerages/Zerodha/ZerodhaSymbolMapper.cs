@@ -128,11 +128,32 @@ namespace QuantConnect.Brokerages.Zerodha
                         break;
                 }
 
+                switch (tp.Segment)
+                {
+                    case "INDICES":
+                        securityType = SecurityType.Index;
+                        break;
+                    default:
+                        break;
+                }
+
 
                 if (securityType == SecurityType.Option)
                 {
                     var strikePrice = tp.Strike;
                     var expiryDate = tp.Expiry;
+                    if(tp.Name=="NIFTY")
+                    {
+                        tp.Name = "NIFTY 50";
+                    }
+                    if(tp.Name == "BANKNIFTY")
+                    {
+                        tp.Name = "NIFTY BANK";
+                    }
+                    if(tradableInstruments.Where(x => x.TradingSymbol == tp.Name && tp.Segment == "INDICES").Any())
+                    {
+                        securityType = SecurityType.IndexOption;
+                    }
                     //TODO: Handle parsing of BCDOPT strike price
                     if(tp.Segment!= "BCD-OPT")
                     {
@@ -161,11 +182,21 @@ namespace QuantConnect.Brokerages.Zerodha
 
         private decimal GetStrikePrice(CsvInstrument scrip)
         {
-            var strikePrice = scrip.TradingSymbol.Trim().Replace(" ", "").Replace(scrip.Name, "");
-            var strikePriceTemp = strikePrice.Substring(5, strikePrice.Length - 5);
-            var strikePriceResult = strikePriceTemp.Substring(0, strikePriceTemp.Length - 2);
+            try
+            {
+                //TODO: throws exception have to debug for format like NIFTY21MAR16250PE
+                var strikePrice = scrip.TradingSymbol.Trim().Replace(" ", "").Replace(scrip.Name, "");
+                var strikePriceTemp = strikePrice.Substring(5, strikePrice.Length - 5);
+                var strikePriceResult = strikePriceTemp.Substring(0, strikePriceTemp.Length - 2);
 
-            return Convert.ToDecimal(strikePriceResult, CultureInfo.InvariantCulture);
+                return Convert.ToDecimal(strikePriceResult, CultureInfo.InvariantCulture);
+            }
+            catch (Exception ex)
+            {
+                return 0;
+                //throw;
+            }
+            
         }
 
         /// <summary>

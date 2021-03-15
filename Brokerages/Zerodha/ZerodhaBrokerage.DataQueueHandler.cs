@@ -82,7 +82,8 @@ namespace QuantConnect.Brokerages.Zerodha
             return
                  (securityType == SecurityType.Equity ||
                     securityType == SecurityType.Option ||
-                    securityType == SecurityType.Future) &&
+                    securityType == SecurityType.Future ||
+                    securityType == SecurityType.IndexOption) &&
                     (market == Market.MCX ||
                     market == Market.NSE ||
                     market == Market.NFO ||

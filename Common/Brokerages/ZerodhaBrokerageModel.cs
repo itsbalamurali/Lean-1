@@ -67,7 +67,8 @@ namespace QuantConnect.Brokerages
             // validate security type
             if (security.Type != SecurityType.Equity &&
                 security.Type != SecurityType.Option &&
-                security.Type != SecurityType.Future)
+                security.Type != SecurityType.Future &&
+                security.Type != SecurityType.IndexOption)
             {
                 return false;
             }
@@ -100,7 +101,8 @@ namespace QuantConnect.Brokerages
             // validate security type
             if (security.Type != SecurityType.Equity &&
                 security.Type != SecurityType.Option &&
-                security.Type != SecurityType.Future)
+                security.Type != SecurityType.Future &&
+                security.Type != SecurityType.IndexOption)
             {
                 message = new BrokerageMessageEvent(BrokerageMessageType.Warning, "NotSupported",
                     Invariant($"The {nameof(ZerodhaBrokerageModel)} does not support {security.Type} security type.")
