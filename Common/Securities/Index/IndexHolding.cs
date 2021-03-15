@@ -13,24 +13,22 @@
  * limitations under the License.
 */
 
-using QuantConnect.Securities;
-
-namespace QuantConnect.Lean.Engine.Setup
+namespace QuantConnect.Securities.Index
 {
     /// <summary>
-    /// Live trading cash amount limit
+    /// Index holdings implementation of the base securities class
     /// </summary>
-    public class CashAmountLimit
+    /// <seealso cref="SecurityHolding"/>
+    public class IndexHolding : SecurityHolding
     {
         /// <summary>
-        /// The cash amount to limit
+        /// INDEX Holding Class constructor
         /// </summary>
-        public CashAmount Cash { get; set; }
-
-        /// <summary>
-        /// True will enforce this cash amount in the algorithm even if the brokerage does not have this exact cash currency
-        /// </summary>
-        /// <remarks>This is useful because brokerages like IB allow you to trade in other currencies you don't have handling conversions internally</remarks>
-        public bool Force { get; set; }
+        /// <param name="security">The INDEX security being held</param>
+        /// <param name="currencyConverter">A currency converter instance</param>
+        public IndexHolding(Index security, ICurrencyConverter currencyConverter)
+            : base(security, currencyConverter)
+        {
+        }
     }
 }
