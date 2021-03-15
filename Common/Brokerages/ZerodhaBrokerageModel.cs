@@ -37,6 +37,11 @@ namespace QuantConnect.Brokerages
 
         private const decimal _maxLeverage = 7m;
 
+        public override AccountType AccountType => base.AccountType;
+
+        public override decimal RequiredFreeBuyingPowerPercent => base.RequiredFreeBuyingPowerPercent;
+
+
         /// <summary>
         /// Initializes a new instance of the <see cref="ZerodhaBrokerageModel"/> class
         /// </summary>
@@ -60,7 +65,9 @@ namespace QuantConnect.Brokerages
         {
 
             // validate security type
-            if (security.Type != SecurityType.Equity)
+            if (security.Type != SecurityType.Equity &&
+                security.Type != SecurityType.Option &&
+                security.Type != SecurityType.Future)
             {
                 return false;
             }
@@ -91,7 +98,9 @@ namespace QuantConnect.Brokerages
             message = null;
 
             // validate security type
-            if (security.Type != SecurityType.Equity)
+            if (security.Type != SecurityType.Equity &&
+                security.Type != SecurityType.Option &&
+                security.Type != SecurityType.Future)
             {
                 message = new BrokerageMessageEvent(BrokerageMessageType.Warning, "NotSupported",
                     Invariant($"The {nameof(ZerodhaBrokerageModel)} does not support {security.Type} security type.")
