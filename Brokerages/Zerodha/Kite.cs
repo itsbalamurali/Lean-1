@@ -545,10 +545,10 @@ namespace QuantConnect.Brokerages.Zerodha
                         instruments = Get("market.instruments", param);
                     }
 
-                    foreach (var item in instruments)
-                    {
-                        instruments.Add(item);
-                    }
+                    //foreach (var item in instruments)
+                    //{
+                    //    instruments.Add(item);
+                    //}
 
                     using (var writer = new StreamWriter(latestFile))
                     using (var csv = new CsvWriter(writer, CultureInfo.InvariantCulture))

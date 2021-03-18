@@ -172,7 +172,7 @@ namespace QuantConnect.Brokerages
                 return 1m;
             }
 
-            if (security.Type == SecurityType.Equity || security.Type == SecurityType.Future || security.Type == SecurityType.Option)
+            if (security.Type == SecurityType.Equity || security.Type == SecurityType.Future || security.Type == SecurityType.Option || security.Type== SecurityType.Index || security.Type == SecurityType.IndexOption)
             {
                 return _maxLeverage;
             }
