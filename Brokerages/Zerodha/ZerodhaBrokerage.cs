@@ -174,7 +174,7 @@ namespace QuantConnect.Brokerages.Zerodha
             foreach (var symbol in symbols)
             {
                 var market = GetSymbolMarket(symbol);
-                var instrumentToken = _symbolMapper.GetZerodhaInstrumentToken(symbol.ID.Symbol, market);
+                var instrumentToken = _symbolMapper.GetSymbolInstrumentToken(symbol, market);
                 if (instrumentToken == 0)
                 {
                     Log.Error("ZerodhaBrokerage.Subscribe(): Invalid Zerodha Instrument token");

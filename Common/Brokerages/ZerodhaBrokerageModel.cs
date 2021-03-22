@@ -73,7 +73,7 @@ namespace QuantConnect.Brokerages
                 return false;
             }
 
-           
+
             // validate time in force
             if (!_supportedTimeInForces.Contains(order.TimeInForce.GetType()))
             {
@@ -111,7 +111,7 @@ namespace QuantConnect.Brokerages
                 return false;
             }
 
-           
+
             // validate time in force
             if (!_supportedTimeInForces.Contains(order.TimeInForce.GetType()))
             {
@@ -136,7 +136,7 @@ namespace QuantConnect.Brokerages
         public override bool CanUpdateOrder(Security security, Order order, UpdateOrderRequest request, out BrokerageMessageEvent message)
         {
             message = null;
-             return true;
+            return true;
         }
 
         /// <summary>
@@ -161,7 +161,7 @@ namespace QuantConnect.Brokerages
         }
 
         /// <summary>
-        /// Zerodha global leverage rule
+        /// Zerodha global leverage rule    
         /// </summary>
         /// <param name="security"></param>
         /// <returns></returns>
@@ -172,7 +172,7 @@ namespace QuantConnect.Brokerages
                 return 1m;
             }
 
-            if (security.Type == SecurityType.Equity || security.Type == SecurityType.Future || security.Type == SecurityType.Option)
+            if (security.Type == SecurityType.Equity || security.Type == SecurityType.Future || security.Type == SecurityType.Option || security.Type == SecurityType.Index || security.Type == SecurityType.IndexOption)
             {
                 return _maxLeverage;
             }
