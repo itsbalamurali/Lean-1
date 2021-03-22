@@ -212,6 +212,13 @@ namespace QuantConnect.Brokerages.Zerodha
                     return "nse";
                 }
             }
+            else if (symbol.SecurityType == SecurityType.IndexOption && symbol.ID.Market.ToLowerInvariant() == "nfo" && symbol.HasUnderlying)
+            {
+                if ((symbol.Underlying.SecurityType == SecurityType.Equity || symbol.Underlying.SecurityType == SecurityType.Index) && symbol.Underlying.ID.Market == "nfo")
+                {
+                    return "nse";
+                }
+            }
             return symbol.ID.Market;
         }
 
